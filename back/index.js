@@ -14,21 +14,26 @@ app.get("/", (req, res) => {
 // サーバーオブジェクトsocketioを作成する
 const { Server } = require("socket.io");
 const io = new Server(server, {
-    cors: {                      // corsモジュールでは上手くCORSできないため、Server作成時の引数にオプションを追加する
+    cors: {
+        // corsモジュールでは上手くCORSできないため、Server作成時の引数にオプションを追加する
         origin: "*",
         methods: ["GET", "POST"],
     },
 });
 
-io.on("connection", (socket) => { // ブラウザから接続されたときの処理
+io.on("connection", (socket) => {
+    // ブラウザから接続されたときの処理
     console.log("a user connected");
-    socket.on("disconnect", () => { // ブラウザが切断したときの処理
+
+    // ブラウザが切断したときの処理
+    socket.on("disconnect", () => {
         console.log("user disconnected");
     });
-    // socket.on("chat message", (msg) => {
-    //     console.log("message: " + msg);
-    //     io.emit("chat message", msg);
-    // });
+
+    socket.on("chat message", (msg) => {
+        // console.log("message:" + msg);
+        io.emit("chat message", msg);
+    });
 });
 
 // serverをPORT3000で待ち受ける。app.listenだとNG。
