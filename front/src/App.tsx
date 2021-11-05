@@ -1,6 +1,5 @@
-import React, { useState, memo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-// socket.io-clientをインポートする
 import { io } from "socket.io-client";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Input, Button } from "@chakra-ui/react";
@@ -8,52 +7,50 @@ import { Input, Button } from "@chakra-ui/react";
 // socketを接続する。Webサーバと別ドメインの場合には引数が必要。
 const socket = io("http://localhost:3000");
 socket.on("connect", () => {
-    console.log(`socket.connectの中身：`);
-    // console.log(socket.connect());
-    console.log(socket);
+    console.log(`接続しました。socket.connectの中身↓`);
+    console.log(socket.connect());
 });
 
 function App() {
-    // メッセージリストを定義
+    // メッセージリスト（全員が送ったメッセージの一覧）をStateとして定義
     const [messageList, setMessageList] = useState<string[]>([]);
-    // メッセージを定義
+    // インプットエリアに入力するメッセージをStateとして定義
     const [message, setMessage] = useState("");
 
-    // サーバから"chat message"イベントが送信されたときの処理
-    // messageListに送信されたメッセージを追加する
-    // ここがめっちゃ実行されている。なのでuseEffectを入れた。
-    useEffect(() => {
-        socket.on("chat message", (msg) => {
-            setMessageList([...messageList, msg]); // 元のmessageListにmsgを追加してみる
-            console.log("setMessageList"+msg);
-            console.log(messageList)
-        });
-    });
+    // サーバから"chat"イベントが送信されたときの処理
+    // messageListに、Webサーバから受け取ったメッセージを追加する。
 
-    // Inputの文字が変更されたときの処理
-    // messageに値を格納する
+    useEffect(() => {
+        socket.on("chat", (msg) => {
+            setMessageList((messageList) => [...messageList, msg]);
+            console.log("setMessageListを実行：" + messageList);
+        });
+    }, []);
+
+    // インプットエリアの文字が変更されたときの処理。
+    // messageの値を都度変更する。
     const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("setMessage");
         setMessage(e.target.value);
     };
 
-    // ボタンを押したときの処理
+    // 「送る」ボタンを押したときの処理。サーバにmessageを送信する。
     const onClickSend = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
-        console.log("onClickSend");
         e.preventDefault();
         socket.emit("chat message", message);
         setMessage("");
+        console.log("    ");
     };
+
     return (
         <ChakraProvider>
             <>
                 <ul>
-                    {messageList.map((data) => {
-                        // indexを消してみる
-                        return <li key={data}>{data}</li>;
+                    {messageList.map((data, index) => {
+                        return <li key={index}>{data}</li>;
                     })}
+                    {console.log("メッセージリスト（画面描画前にログ出力）：" + messageList)}
                 </ul>
                 <Input
                     placeholder="なにか文字を入力してください"
