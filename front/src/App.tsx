@@ -3,6 +3,7 @@ import "./App.css";
 import { io } from "socket.io-client";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Input, Button } from "@chakra-ui/react";
+import { MessageListArea } from "./components/organisms/messageListArea";
 
 // socketを接続する。Webサーバと別ドメインの場合には引数が必要。
 const socket = io("http://localhost:3000");
@@ -25,6 +26,7 @@ function App() {
             setMessageList((messageList) => [...messageList, msg]);
             console.log("setMessageListを実行：" + messageList);
         });
+        // *es
     }, []);
 
     // インプットエリアの文字が変更されたときの処理。
@@ -46,6 +48,7 @@ function App() {
     return (
         <ChakraProvider>
             <>
+                <MessageListArea />
                 <ul>
                     {messageList.map((data, index) => {
                         return <li key={index}>{data}</li>;
