@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { io } from "socket.io-client";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Input, Button } from "@chakra-ui/react";
-import { MessageListArea } from "./components/organisms/messageListArea";
+import { MessageListArea } from "./components/organisms/MessageListArea";
+import { InputArea } from "./components/molecules/InputArea";
 
 // socketを接続する。Webサーバと別ドメインの場合には引数が必要。
 const socket = io("http://localhost:3000");
@@ -48,19 +48,13 @@ function App() {
     return (
         <ChakraProvider>
             <>
-                <MessageListArea />
-                <ul>
-                    {messageList.map((data, index) => {
-                        return <li key={index}>{data}</li>;
-                    })}
-                    {console.log("メッセージリスト（画面描画前にログ出力）：" + messageList)}
-                </ul>
-                <Input
-                    placeholder="なにか文字を入力してください"
-                    value={message}
+                <MessageListArea messageList={messageList} />
+
+                <InputArea
+                    text={message}
                     onChange={onChangeMessage}
+                    onClick={onClickSend}
                 />
-                <Button onClick={onClickSend}>送る</Button>
             </>
         </ChakraProvider>
     );
