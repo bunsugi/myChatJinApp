@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, Text } from "@chakra-ui/layout";
+import { Flex, Spacer, Text } from "@chakra-ui/layout";
 import { VFC } from "react";
 import { MessageContent } from "../../types/messageContent";
 
