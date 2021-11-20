@@ -1,9 +1,10 @@
 import { Box } from "@chakra-ui/layout";
 import { VFC } from "react";
+import { MessageContent } from "../../types/messageContent";
 import { MessageBalloon } from "../molecules/MessageBalloon";
 
 type Props = {
-    messageList: string[];
+    messageList: MessageContent[];
 };
 
 export const MessageListArea: VFC<Props> = (props) => {
@@ -23,8 +24,8 @@ export const MessageListArea: VFC<Props> = (props) => {
                 boxShadow="orange.100"
                 // w={{ base: "100px", md: "400px", lg: "600px" }}
             >
-                {messageList.map((data, index) => {
-                    return <MessageBalloon key={index} text={data} />;
+                {messageList.map((messageContent, index) => {
+                    return <MessageBalloon key={index} messageContent={messageContent} />;
                 })}
             </Box>
         </ul>
