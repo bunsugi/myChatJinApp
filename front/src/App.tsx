@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { io } from "socket.io-client";
 import { ChakraProvider } from "@chakra-ui/react";
-import { MessageListArea } from "./components/organisms/MessageListArea";
+import { MessageListArea } from "./components/organisms/messageListArea";
 import { InputArea } from "./components/molecules/InputArea";
 
 // socketを接続する。Webサーバと別ドメインの場合には引数が必要。
