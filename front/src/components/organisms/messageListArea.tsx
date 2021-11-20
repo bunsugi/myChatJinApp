@@ -23,10 +23,8 @@ export const MessageListArea: VFC<Props> = (props) => {
                 boxShadow="orange.100"
                 // w={{ base: "100px", md: "400px", lg: "600px" }}
             >
-                
                 {messageList.map((data, index) => {
-                    return <MessageBalloon key={index} text={data}/>
-                    // return <li key={index}>{data}</li>;
+                    return <MessageBalloon key={index} text={data} />;
                 })}
             </Box>
         </ul>

@@ -13,24 +13,21 @@ socket.on("connect", () => {
 });
 
 function App() {
-    // メッセージリスト（全員が送ったメッセージの一覧）をStateとして定義
+    // メッセージリスト（全員が送ったメッセージの一覧）
     const [messageList, setMessageList] = useState<string[]>([]);
-    // インプットエリアに入力するメッセージをStateとして定義
+    // インプットエリアに入力するメッセージ
     const [message, setMessage] = useState("");
 
     // サーバから"chat"イベントが送信されたときの処理
-    // messageListに、Webサーバから受け取ったメッセージを追加する。
+    // （messageListに、Webサーバから受け取ったメッセージを追加する。）
 
     useEffect(() => {
         socket.on("chat", (msg) => {
             setMessageList((messageList) => [...messageList, msg]);
-            console.log("setMessageListを実行：" + messageList);
         });
-        // *es
     }, []);
 
     // インプットエリアの文字が変更されたときの処理。
-    // messageの値を都度変更する。
     const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value);
     };
@@ -42,7 +39,6 @@ function App() {
         e.preventDefault();
         socket.emit("chat message", message);
         setMessage("");
-        console.log("    ");
     };
 
     return (

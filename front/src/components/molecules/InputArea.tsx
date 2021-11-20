@@ -2,6 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
 import { Flex } from "@chakra-ui/layout";
 import { VFC } from "react";
+import styled from "styled-components";
 
 type Props = {
     text: string;
@@ -12,20 +13,18 @@ type Props = {
 export const InputArea: VFC<Props> = (props) => {
     const { text, onChange, onClick } = props;
     return (
-        
-        <Flex align="center">
+        <Flex align="center" justifyContent="center">
             <Input
-                variant="flushed"
                 placeholder="なにか文字を入力してください"
                 value={text}
                 w="80%"
                 size="md"
                 p={3}
-                border="none"
                 onChange={onChange}
+                _focus={{ boxShadow: "none" }}
             />
             <Button
-                m={2}
+                ml={2}
                 bg="orange.500"
                 color="white"
                 _hover={{ opacity: 0.7 }}
