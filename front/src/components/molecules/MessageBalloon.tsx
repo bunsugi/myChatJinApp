@@ -20,7 +20,7 @@ export const MessageBalloon: VFC<Props> = (props) => {
             mb={2}
             align="center"
         >
-            <Text fontSize="xs" color="gray.500">
+            <Text fontSize="xs" color="gray.500" mr={1}>
                 {messageContent.name}
             </Text>
             <Text fontSize="sm">{messageContent.message}</Text>
