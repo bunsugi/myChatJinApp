@@ -2,7 +2,6 @@ import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
 import { Flex } from "@chakra-ui/layout";
 import { VFC } from "react";
-import styled from "styled-components";
 
 type Props = {
     text: string;
