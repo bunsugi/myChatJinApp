@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { io } from "socket.io-client";
 import { ChakraProvider } from "@chakra-ui/react";
-import { InputArea } from "./components/molecules/InputArea";
 import { MessageContent } from "./types/messageContent";
 import { MessageListArea } from "./components/organisms/messageListArea";
 import { MessageInputArea } from "./components/organisms/MessageInputArea";
