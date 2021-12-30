@@ -41,6 +41,7 @@ export const MainChat = () => {
     };
 
     // 「送る」ボタンを押したときの処理。サーバにmessageを送信する。
+    //  messageContentオブジェクト（中身は名前/メッセージ/発言時刻）
     const onClickSend = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         const date = new Date();
