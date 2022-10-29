@@ -27,7 +27,7 @@ export const MainChat = () => {
     const { name } = state;
 
     //------------------------------------------
-    // サーバから"chat"イベントが送信されたときの処理
+    // サーバから"chat"イベントが送信されたときの処理   
     // （messageListに、Webサーバから受け取ったメッセージを追加する。）
     useEffect(() => {
         socket.on("chat", (messageContent) => {
